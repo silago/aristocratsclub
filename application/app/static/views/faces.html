@@ -1,0 +1,65 @@
+<div class="columns large-12">
+
+<div ng-show="sidewall||sidesearch"style="position:absolute;  margin-left:-30px;  z-index:999;" class="row">
+    <div style="" class="columns large-4">
+    &nbsp;
+    </div>
+    <div ng-if="sidewall" class="columns panel large-4">
+    Стена
+    </div>
+    <div ng-if="sidesearch" style="" class="columns panel large-4">
+    Поиск ответа
+    </div>
+</div>
+
+
+<div style="position:absolute; left:100%; margin-left:20px;">
+    <ul> 
+        <li> <a ng-click="sidewall=!sidewall" href> Стена </a></li>
+        <li> <a ng-click="sidesearch=!sidesearch" href> Поиск </a></li>
+    </ul>
+</div>  
+
+ <div ng-init="$data = getFromModel('User', content.options)">
+        <div ng-repeat="i in $data.data">
+            <div style="float:left;" class="large-3">
+                <a ng-click="$parent.profile=i;window.scrollTo(0,$('#profile').offset().top+250)  " href ><img src="/static/media/thumb_{{i.img}}" alt="{{i.name}}" /></a>
+            </div>
+            <div ng-if="($index+1) == ($data.data.length/2) ">
+                <div id="profile" style="position:relative; z-index:9999;" ng-show="$parent.profile">
+                    <div>
+                    
+
+                    <div style="background-color: rgb(36, 36, 36); left: 0px; z-index: 99; height: 100%; opacity: 0.85; position: fixed; top: 0px; width: 100%;"> </div>
+                    <!-- Профиль -->
+                        <div style="width:100%;margin-left:-25%; position:relative; z-index:9999;">
+                            <div style="position: relative; width: 150%; white-space: nowrap; padding-left: 50%; top: 75px; background-color: rgb(250, 250, 250); float: left; height: 76px; margin-top: -40px;" >
+                                    <h2> {{profile.name}}</h2>
+                            </div>
+                        </div>
+                        <div style="width:00px;margin-left:-25%; position:relative; z-index:9999;">
+                        <div style='display: inline-block; width:100%; border-right: 400px solid transparent; border-bottom: 100px solid #000; vertical-align: top;'></div>
+                        <br/>
+                        <div
+                            style="background-color:#000; color:#fff;  border:1px; solid red; width:400px;">
+                            <div style="padding:10px;">
+                            <ul   class="no-bullet">
+                                <li><img src="/static/media/{{profile.img}}" alt="{{profile.name}}"/> </li>
+                                <li>Город: Уныльск </li>
+                                <li>Страна: Россия </li>
+                                <li>Email: mail@mail.ru </li>
+                                <li><a ng-click="$parent.$parent.profile=false;" href > Назад </a></li>
+                            </ul>
+                            </div>
+                        </div>
+
+                        <div style='display: margin-top:-20px; inline-block; width:100%; border-right: 400px solid transparent; border-top: 100px solid #000; vertical-align: top;'></div>
+                        </div>
+                    <!-- И нет профиля -->
+                    </div>
+                </div>
+            </div>
+       
+             </div>
+    </div>
+</div>

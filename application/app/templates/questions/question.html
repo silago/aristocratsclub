@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <p> </p>
+    </div>
+    
+    <div class="columns large-centered large-6">
+    <div class="columns large-6"> Aristokrats </div>
+    <div class="columns large-6"> [ru] [en] [de] </div>
+    
+    <div class="columns large-13"> 
+    <br/>   
+    <br/>   
+    <h2> {{question.name}}</h2>
+    <small> <a href="/question/{{question.alias}}/">/question/{{question.alias}}</a> ({{question.created_at}})</small>
+        <p> {{question.text}} </p>
+    <hr/>
+    {% for answer in answers %}
+        <div class="panel">
+            <small>{{answer.created_at}}</small>
+            <p> {{answer.text}}</p>
+        </div>
+    {% endfor %}        
+ 
+            <form enctype=multipart/form-data action="/answer/{{question.id}}/" method="post" name="login">
+                {% for field in form %}
+                  <label> 
+                      {% if field.type!='CSRFTokenField' %}
+                        {{field.label}}
+                      {% endif %}
+                      {{field}}
+                  </label>
+                {% endfor %}
+                <p><input class="button" name="submit" type="submit" value="answer"></p>
+            </form>
+
+    </div>
+
+    </div>
+
+
+{% endblock %} 

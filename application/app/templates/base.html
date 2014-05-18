@@ -1,0 +1,59 @@
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Aristocrats  </title>
+    <link rel="stylesheet" href="/static/f/css/foundation.css" />
+  </head>
+     <body>
+     <div class="columns large-12 main">
+
+    {% block content %}
+
+
+    {% endblock %}
+ </div>  
+<!--
+    <div class="columns large-12">
+        <br/>
+    </div>
+    <div class="columns large-12">
+    Функции:
+        <a href="/categories/">Категории </a>
+        &nbsp;
+        <a href="/questions/ask/">Задать вопрос </a>
+        &nbsp;
+        <a href="/questions/my/">Мои вопросы </a>
+        &nbsp;
+        <a href="#">Группы</a>
+    </div>
+ -->
+    <script src="/static/f/js/vendor/jquery.js"></script>
+    <script src="/static/f/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      
+      $('ul.acc > li > div').hide();
+      $('ul.acc > li > a').click( function() {
+             if (!($(this).parent().children('div').hasClass('active'))) 
+                $('ul.acc > li > div.active').slideToggle(300).removeClass('active');
+             $(this).parent().children('div').toggleClass('active').slideToggle(300);
+             });
+    </script>
+
+
+    <script src="/static/f/js/vendor/modernizr.js"></script>
+
+    <script src="/static/js/angular/angular.js" type="text/javascript" > </script>
+    <script src="/static/js/angular/angular-resource.js" type="text/javascript" > </script>
+    <script src="/static/js/angular/angular-route.js" type="text/javascript" > </script>
+    <script src="/static/js/angular/angular-cookies.js" type="text/javascript" > </script>
+    <script src="/static/js/current/index.js" type="text/javascript" > </script>
+    <script src="/static/js/current/base/controllers.js" type="text/javascript" > </script>
+    <script src="/static/js/current/base/services.js" type="text/javascript" > </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Aristocrats  </title>
+    <link rel="stylesheet" href="/static/f/css/foundation.css" />
+    <link rel="stylesheet" href="/static/f/css/css.css" />
+    <script src="/static/f/js/vendor/modernizr.js"></script>
+  </head>
+     <body>
+     <div class="columns large-12 main">
+        <div class="row">
+            <div class="columns large-8">
+                <h2> John Doe <span style="color:gray;">Programmer And Haruspic <span> </h2>
+            </div>
+
+            <div class="columns large-4">
+                <h4>  Primum vivere deinde philosophari </h4>
+            </div>
+
+        </div>        
+
+ 
+     </div>  
+
+ 
+    <script src="/static/f/js/vendor/jquery.js"></script>
+    <script src="/static/f/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      
+      $('ul.acc > li > div').hide();
+      $('ul.acc > li > a').click( function() {
+             if (!($(this).parent().children('div').hasClass('active'))) 
+                $('ul.acc > li > div.active').slideToggle(300).removeClass('active');
+             $(this).parent().children('div').toggleClass('active').slideToggle(300);
+             });
+    </script>
+  </body>

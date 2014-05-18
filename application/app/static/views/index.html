@@ -1,0 +1,82 @@
+    
+    <div class="columns large-centered large-9">
+    <div class="columns large-6"> Aristokrats 
+        <form enctype=multipart/form-data action="/search/" method="get">
+            <input type="text"  name="query"/ >
+            <input class="button" name="submit" type="submit" value="Go">
+        </form>
+    </div>
+    <div class="columns large-6"> [ru] [en] [de] </div>
+    
+    <div class="columns large-12"> 
+    <br/>   
+    <div ng-if="content.ready">
+        <div ng-if="content.ready"  ng-include="content.template">
+        </div>
+    </div> 
+
+     <nav class="">
+            <ul class="acc"> 
+                <li>
+                    <a href="#"> Возможности </a>
+                    <div> content </div>
+                </li>
+               
+                
+                <li>
+                    <a ng-model="users_n_dialoges" ng-click="users_n_dialoges=!users_n_dialoges"  href> Участники и диалог </a>
+                    <div ng-show="users_n_dialoges">
+                        <div
+                            ng-init="$data=getFromModel('Category');"
+                        >
+                            <ul>
+                                <li ng-repeat="i in $data.data">
+                                   <a   
+                                        ng-click=   "    
+                                                        animateCategories();
+                                                        updateContent('/static/views/faces.html',{group:i.id});
+                                                    "
+                                        ng=href > {{i.name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#"> VIP сервис </a>
+                    <div> content </div>
+                </li>
+                <li>
+                    <a href="#"> Регистрация/Вход </a>
+                    <div> 
+                            <ul>
+                                <li><a href='/auth/login/'> Вход </a> </li>
+                                <li><a href='/auth/reg/'> Регистрация </a> </li>
+                            </ul>
+                     </div>
+                </li>
+                <li>
+                    <a href="#"> Контакты </a>
+                    <div> content </div>
+                </li>
+
+                <li>
+                    <a href="#"> Возможности </a>
+                    <div> content </div>
+                </li>
+
+
+
+
+
+                
+
+        </nav>
+    <div class="">
+            
+    </div>
+    </div>
+
+    </div>
+

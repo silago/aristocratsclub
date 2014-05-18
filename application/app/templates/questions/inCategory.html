@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+
+
+
+
+    <div class="row">
+        <p> </p>
+    </div>
+    
+    <div class="columns large-centered large-6">
+    <div class="columns large-6"> Aristokrats </div>
+    <div class="columns large-6"> [ru] [en] [de] </div>
+    
+    <div class="columns large-13"> 
+    <br/>   
+    <br/>   
+
+     <nav class="">
+            <ul class=""> 
+               {% for question in questions %}
+                 <li>
+                    <a href="/question/{{question.alias}}/"> {{question.name}} </a>
+                </li>
+               {% endfor %}
+        </nav>
+    </div>
+
+    </div>
+
+
+{% endblock %} 

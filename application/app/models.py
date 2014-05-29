@@ -33,10 +33,12 @@ class User(db.Model):
     img = db.Column(db.String(255),)
     text = db.Column(db.Text(), )
     status = db.Column(db.Integer,)
+    city = db.Column(db.String(255),)
+    country = db.Column(db.String(255),)
     group = db.Column(db.Integer, db.ForeignKey('category.id'))
     created_at = db.Column(db.DateTime)
     def for_api(self):
-        return {'id':self.id,'img':self.img,'name':self.name}
+        return {'id':self.id,'img':self.img,'name':self.name,'city':self.city,'country':self.country,'email':self.email}
     def is_authenticated(self):
         return True
 
@@ -55,6 +57,19 @@ class User(db.Model):
     
     def __repr__(self):
         return '<User %r>' % (self.name)
+
+
+class Media(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    type = db.Column(db.String(255),)
+    url = db.Column(db.String(255),)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    def for_api(self):
+        return {'id':self.id,'type':self.type,'url':self.url}
+    def __unicode__(self):
+        return self.name
+    def __repr__(self):
+        return '<Media %r>' % (self.url)
 
 class Pic(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -98,6 +113,9 @@ class Question(db.Model):
     author = db.Column(db.Integer, db.ForeignKey('user.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    def for_api(self): 
+        return {'id':self.id,'name':self.name,'text':self.text}
+    
     def __repr__(self):
         return '<Question %r>' % (self.name)
 

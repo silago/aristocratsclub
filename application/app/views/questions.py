@@ -1,5 +1,4 @@
-from slugify import slugify
-from flask import render_template,redirect, request, Module
+from flask import render_template,redirect, request, Module, jsonify
 from app.forms import askForm, answerForm
 from app.models import Question, Category, Answer
 from datetime import datetime
@@ -43,15 +42,12 @@ def index():
     return render_template('questions/index.html',categories=categories)
 
 
-@questions.route("/questions/ask/",methods=['GET','POST']) 
+@questions.route("/questions/ask",methods=['GET','PUT']) 
 def ask():
-    form = askForm()
-    if form.validate_on_submit():
-        item = Question()
-        form.populate_obj(item)
-        item.alias = slugify(item.name)+"_"+str(datetime.now()).replace(' ','_')
-        item.author = login.current_user.get_id()
-        db.session.add(item)
-        db.session.commit()
-    else: print form.errors
-    return render_template('base/add.html',form=form)
+    data = request.get_json()
+    question = Question()
+    for k,o in data.iteritems():
+        setattr(question,k,o)
+    db.session.add(question)
+    db.session.commit()
+    return jsonify({})

@@ -1,40 +1,52 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Aristocrats  </title>
-    <link rel="stylesheet" href="/static/f/css/foundation.css" />
-    <link rel="stylesheet" href="/static/f/css/css.css" />
-    <script src="/static/f/js/vendor/modernizr.js"></script>
-  </head>
-     <body>
-     <div class="columns large-12 main">
-        <div class="row">
-            <div class="columns large-8">
-                <h2> John Doe <span style="color:gray;">Programmer And Haruspic <span> </h2>
-            </div>
 
-            <div class="columns large-4">
-                <h4>  Primum vivere deinde philosophari </h4>
-            </div>
 
-        </div>        
+{% extends "nong.html" %}
+{% block content %}
+<div class="columns large-8">
+<h1>Я: {{user.name}}</h1>
+<div>
+    <p> {{user.text}} </p>    
+    
+<div class="columns large-12">
+    <h3 class="subheader columns"> Мои фотографии </h3>
+{% for i in media %}
+    <div class="columns large-3">
+        <div class="panel">
+           <a  href ><img src="/static/media/thumb_{{i.url}}" alt="" /></a>
+        </div>
+    </div>
+{% endfor %}
 
- 
-     </div>  
 
- 
-    <script src="/static/f/js/vendor/jquery.js"></script>
-    <script src="/static/f/js/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
-      
-      $('ul.acc > li > div').hide();
-      $('ul.acc > li > a').click( function() {
-             if (!($(this).parent().children('div').hasClass('active'))) 
-                $('ul.acc > li > div.active').slideToggle(300).removeClass('active');
-             $(this).parent().children('div').toggleClass('active').slideToggle(300);
-             });
-    </script>
-  </body>
+
+<div class="columns large-3 left">
+    <div class="panel">
+    <form enctype=multipart/form-data action="" method="post" name="login">
+        <img src='/static/img/add_icon.png' style="cursor:pointer;" onclick="$(this).parent().children('input[type=file]').click();"  alt='' />
+        <input  name="img" style="display:none;" onchange="$(this).closest('form').submit();" type="file" />
+        <input type="submit" style="display:none;" value="ok" />
+    </form>
+    </div>
+</div>
+</div>
+<form enctype=multipart/form-data action="" method="post" name="login">
+    {% for field in form %}
+    <div class="large-12 columns">
+      <label> 
+          {% if field.type!='CSRFTokenField' %}
+            {{field.label}}
+          {% endif %}
+          
+          {{field}}
+      </label>
+    </div>
+    
+    {% endfor %}
+    
+    <div class="large-12 columns">
+    <p><input class="button" name="submit" type="submit" value="Sign In"></p>
+    </div>
+</form>
+</div>
+{% endblock %} 
+

@@ -2,7 +2,9 @@
 {% extends "base.html" %}
 {% block content %}
 <div ng-app="base">
-    <div ng-view>
+    <div 
+    ng-init="current={{current}}"
+    ng-view>
     
     </div>
 </div>

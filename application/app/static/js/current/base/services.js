@@ -24,8 +24,32 @@ angular.module('base.services', ['ngResource'])
                      }
               }
             
-          )})
-;
+          )}).factory('Me',function($resource){
+          return $resource('/me//',
+              {
+                method: '@method',
+                options: '@options', 
+              },
+              {  POST:{
+                    method:"POST",
+                    params: {method:"POST"},
+                    }
+              }
+            
+          )}).factory('Question',function($resource){
+          return $resource('/questions/ask/',
+             {
+               method: '@method',
+             },
+             { PUT:{
+                    method: "PUT",
+                    params: {method:"PUT"},
+                    }
+             })})
+;           
+
+
+
 
 /*
 angular.module('admin.services', ['ngResource'])

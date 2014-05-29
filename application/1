@@ -5,22 +5,7 @@
     &nbsp;
     </div>
     <div ng-if="sidewall" class="columns panel large-4">
-        <div ng-init="$wall = getFromModel('Question',{'category':content.options.group})">
-                <form name="ask" ng-init="$question={'category':content.options.group}" >
-                    <input     ng-model="$question.name"  class="columns large-12" name="name" type="text" placeholder="Тема вопроса" />
-                    <textarea  ng-model="$question.text" class="columns large-12" placholder="Текст вопроса" name="text"> </textarea>
-                    <button  ng-click="Ask($question);"  class="small large-12 columns"> submit </button>
-                    </form>
-                <div  class="columns large-12">
-                    <h5 class="subheader"> Вопросыы раздела </h5>
-                </div>
-                <div class="columns large-12" ng-repeat="w in $wall.data">
-                    
-                        <div class="panel"> <a href='#'> {{w.name}} </a> </div>
-                </div>
-        </div>
-
- 
+    Стена
     </div>
     <div ng-if="sidesearch" style="" class="columns panel large-4">
     Поиск ответа
@@ -38,10 +23,13 @@
  <div ng-init="$data = getFromModel('User', content.options)">
         <div ng-repeat="i in $data.data">
             <div style="float:left;" class="large-3">
-                <a ng-click="$parent.profile=i; scrollTo(0,600);" href ><img src="/static/media/thumb_{{i.img}}" alt="{{i.name}}" /></a>
+                <a ng-click="$parent.profile=i;window.scrollTo(0,$('#profile').offset().top+250)  " href ><img src="/static/media/thumb_{{i.img}}" alt="{{i.name}}" /></a>
             </div>
             <div ng-if="($index+1) == ($data.data.length/2) || ($index+1)==(($data.data.length+1)/2) ">
                 <div id="profile" style="position:relative; z-index:9999;" ng-show="$parent.profile">
+                    <div>
+                    
+
                     <div style="background-color: rgb(36, 36, 36); left: 0px; z-index: 99; height: 100%; opacity: 0.85; position: fixed; top: 0px; width: 100%;"> </div>
                     <!-- Есть профиль -->
                         <div style="left:-25%; width:300%; position:relative; z-index:9999;">
@@ -60,28 +48,13 @@
                             <div
                                 style="background-color:#000; color:#fff;  border:1px; solid red; width:100%;">
                                 <div style="padding:10px;">
-                                <ul id="editableProfile" class="no-bullet">
+                                <ul   class="no-bullet">
                                     <li><img style="width:100%;" src="/static/media/{{profile.img}}" alt="{{profile.name}}"/> </li>
-                                    <li> <span> Город: {{profile.city}} </span> </li>
-                                    <li> <span> Страна:{{profile.country}} </span> </li>
-                                    <li> <span> Email: {{profile.email}}   </span> </li>
+                                    <li>Город: Уныльск </li>
+                                    <li>Страна: Россия </li>
+                                    <li>Email: mail@mail.ru </li>
                                     <li><a ng-click="$parent.$parent.profile=false;" href > Назад </a></li>
-                                    <li><a href ng-click="profile.$$profileForm=true" ng-if="current.uid==profile.id">  Редактировать </a>
-                    
-                                    <div ng-if="profile.$$profileForm">
-                                        <form enctype=multipart/form-data action="" method="post" name="login">
-                                            <input ng-change="profile.$$changed=true" type="text" ng-model="profile.city" name="city"> 
-                                            <input ng-change="profile.$$changed=true" type="text" ng-model="profile.country" name="country"> 
-                                            <input ng-change="profile.$$changed=true" type="text" ng-model="profile.email" name="city"> 
-                                        <a ng-click="profile.$$profileForm = undefined;" href> ok </a>
-                                        </form>
-                                    </div>
-                                    </li>
-                                    <li>
-                                        <a href ng-click=" profile.$$changed=undefined; Me().POST({data:toJson(profile)});"  ng-show=" !profile.$$profileForm && profile.$$changed"> apply </a>
-                                    </li>
                                 </ul>
-                                 
                                 </div>
                             </div>
                             <div style='display: margin-top:-20px; inline-block; width:100%; border-right: 400px solid transparent; border-top: 100px solid #000; vertical-align: top;'></div>
@@ -129,7 +102,7 @@
                             <div ng-init="$photos = getFromModel('Media', {'user_id':profile.id})">
                                 <div ng-repeat="photo in $photos.data">
                                     <div class="columns large-3">
-                                        <div class="panel">
+                                        <div class="panel">{{$root}}
                                            <a  href ><img src="/static/media/thumb_{{photo.url}}" alt="" /></a>
                                         </div>
                                     </div>

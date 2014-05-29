@@ -1,9 +1,9 @@
     
     <div class="columns large-centered large-9">
-    <div class="columns large-6"> Aristokrats 
+    <div class="columns large-6"> <span> Aristokrats  </span>  <br/> <br/>
         <form enctype=multipart/form-data action="/search/" method="get">
-            <input type="text"  name="query"/ >
-            <input class="button" name="submit" type="submit" value="Go">
+           <div class="columns large-10"> <input type="text"  name="query"/ > </div>
+           <div class="columns large-2"> <input class="button tiny" name="submit" type="submit" value="Go"> </div>
         </form>
     </div>
     <div class="columns large-6"> [ru] [en] [de] </div>
@@ -16,16 +16,24 @@
     </div> 
 
      <nav class="">
-            <ul class="acc"> 
+            <ul ng-init="show=false" class="acc"> 
                 <li>
-                    <a href="#"> Возможности </a>
-                    <div> content </div>
+                    <a href ng-click="show= (show=='facilities') ? false : 'facilities'" > Возможности </a>
+                    <div ng-show="show=='facilities'">
+<h4>Дамы и Господа, добро пожаловать в наш Клуб!</h4>
+<p>
+Без сомнений мы будем друг другу полезны. Однако, Клуб не безграничен, потому не всем желающим есть сюда доступ. Приносим извинения.
+</p><p>Наш Клуб для людей состоявшихся, кто может собственным знанием и опытом проконсультировать других Участников, которые нуждаются в Вас. В свою очередь Вы получаете доступ к эксклюзивной информации от специалиста, в ком Вы уже сами заинтересованы.
+</p><p>Вы можете задать вопрос конкретному Участнику, которого сами выберете. Область ваших вопросов безгранична, но и Вы будьте внимательны ко всем Участникам Клуба, обратившихся к Вам. Мы не сомневаемся в корректности ответа с любой из сторон. В Клубе исключены диалоги характера «посиделок», «тусовок». Просим воздержаться от «личных альбомов». Нет и сервиса создания групп. В социальных сетях интернета всего этого предостаточно.
+</p><p>Все исключительно по делу, по необходимости, по проблеме, возникшей в Вашей жизни.                       Вам осталось  только зарегистрироваться, а нам предоставить Приглашение.
+</p>
+                  </div>
                 </li>
                
                 
                 <li>
-                    <a ng-model="users_n_dialoges" ng-click="users_n_dialoges=!users_n_dialoges"  href> Участники и диалог </a>
-                    <div ng-show="users_n_dialoges">
+                    <a ng-click="show= (show=='users_n_dialoges') ? false : 'users_n_dialoges'"  href> Участники и диалог </a>
+                    <div ng-show="show=='users_n_dialoges'">
                         <div
                             ng-init="$data=getFromModel('Category');"
                         >
@@ -36,7 +44,7 @@
                                                         animateCategories();
                                                         updateContent('/static/views/faces.html',{group:i.id});
                                                     "
-                                        ng=href > {{i.name}}</a>
+                                        href > {{i.name}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -44,10 +52,15 @@
                 </li>
 
                 <li>
-                    <a href="#"> VIP сервис </a>
-                    <div> content </div>
+                    <a href ng-click="show= (show=='vip') ? false : 'vip'" > VIP сервис </a>
+                    <div ng-show="show=='vip'"> 
+<h4> Это не рекламный лист. Цель одна — поделиться удивительным. </h4>
+<p>
+ Необычное всегда притягивает. Фокусы и фокусники здесь не при чем. Здесь то, чем реально вы можете воспользоваться. Участники Клуба предоставляют эти уникальные вещицы, а мы только публикуем и восхищаемся вместе с вами…..
+</p>
+                     </div>
                 </li>
-                <li>
+                <li ng-if="!(current.uid>0)">
                     <a href="#"> Регистрация/Вход </a>
                     <div> 
                             <ul>
@@ -57,21 +70,19 @@
                      </div>
                 </li>
                 <li>
-                    <a href="#"> Контакты </a>
-                    <div> content </div>
+                    <a href ng-click="show= (show=='contacts') ? false : 'contacts'"> Контакты </a>
+                    <div ng-show="show=='contacts'"> 
+                        <ul>
+                            <li>Název subjektu: Consillieri Global Consulting, s.r.o.</li>
+                            <li>IČO: 27959929</li>
+                            <li>Sídlo: Praha 9, Střížkov, Českolipská 391/22, PSČ 19000</li>
+                            <li>Den zápisu: 17.09.2007</li>
+                        </ul>
+            </div>
                 </li>
-
-                <li>
-                    <a href="#"> Возможности </a>
-                    <div> content </div>
+                <li ng-if="current.uid>0">
+                    <a href="/auth/logout/"> Выход </a>
                 </li>
-
-
-
-
-
-                
-
         </nav>
     <div class="">
             

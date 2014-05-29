@@ -33,10 +33,11 @@ init_login()
 
 """ importing app modules """
 from app.views.main import main
+from app.views.questions import questions
 #from app.views.tags import tags
 from app.views.auth import auth, UserAdminView
 app.register_module(main)
-#app.register_module(tags)
+app.register_module(questions)
 app.register_module(auth)
 
 #from app.models import Boob, Tag, User

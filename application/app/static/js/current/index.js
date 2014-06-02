@@ -6,6 +6,8 @@ app.config(['$routeProvider',
 	function($routeProvider){
 		$routeProvider
 		.when('/base/',{templateUrl:'/static/views/index.html',controller:'baseCtrl'})
+        .when('/profile/:id/',{templateUrl:'/static/views/profile.html',controller:'baseCtrl'})
+		.when('/question/:id/',{templateUrl:'/static/views/question.html',controller:'baseCtrl'})
 			.otherwise({redirectTo:'/base/'});
 	}
 ]);

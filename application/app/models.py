@@ -128,6 +128,8 @@ class Answer(db.Model):
     author = db.Column(db.Integer, db.ForeignKey('user.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    def for_api(self):
+        return {'id':self.id,'text':self.text,'created_at':self.created_at,'author':User().query.filter('id='+str(self.author)).first().for_api()}
     def __repr__(self):
         return '<Answer %r>' % (self.name)
 

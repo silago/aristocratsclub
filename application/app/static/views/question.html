@@ -1,0 +1,68 @@
+    
+    <div class="columns large-9 large-centered">
+
+    <div class="columns large-6"> <span> Aristokrats  </span>  <br/> <br/>
+        <form enctype=multipart/form-data action="/search/" method="get">
+           <div class="columns large-10"> <input type="text"  name="query"/ > </div>
+           <div class="columns large-2"> <input class="button tiny" name="submit" type="submit" value="Go"> </div>
+        </form>
+    </div>
+    <div class="columns large-6"> [ru] [en] [de] </div>
+   
+
+
+ 
+    <div class="columns large-12"> 
+
+
+     <div style="position:absolute; left:-200px;" class="columns large-12">
+            <nav>
+            <ul ng-init="show=false" class="acc"> 
+                  <li> <a href="/">На главную</a></li>
+                    <li>
+                        <a ng-click="show= (show=='users_n_dialoges') ? false : 'users_n_dialoges'"  href> Участники и диалог </a>
+                        <div ng-show="show=='users_n_dialoges'">
+                            <div
+                                ng-init="$data=getFromModel('Category');"
+                            >
+                                <ul>
+                                    <li ng-repeat="i in $data.data">
+                                       <a   
+                                            ng-click=   "    
+                                                            updateContent('/static/views/faces.html',{group:i.id});
+                                                        "
+                                            href > {{i.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+            </ul> 
+            </nav>
+    </div>
+     
+    <div ng-init="$question = getFromModel('Question', {'id':routeParams.id})">
+            <h3> {{$question.data[0].name}} </h3>
+            <p> 
+                {{$question.data[0].text}}
+            </p>
+        <h5> Ответы </h5>
+
+        
+        <div ng-init="$answers = getFromModel('Answer', {'question':routeParams.id})">
+            <div ng-if="$answers.data.length==0"> 
+                <strong> Вопрос всё еще без ответа </strong>
+            </div>
+
+            <div ng-repeat="answer in $answers.data">
+                <p class="panel"> 
+                <small> <strong> {{answer.created_at}}, {{answer.author.name}}</strong></small> <br/>
+
+                {{answer.text}} </p> 
+            </div>
+        </div>
+
+    </div>  
+    </div>
+
+

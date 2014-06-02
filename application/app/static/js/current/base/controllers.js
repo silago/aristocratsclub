@@ -1,7 +1,10 @@
 
-angular.module('base').controller('baseCtrl',function($scope,$http,$cookies,$location,Model,Me,Question){
+angular.module('base').controller('baseCtrl',function($scope,$routeParams,  $http,$cookies,$location,Model,Me,Question){
     $scope.scrollTo = function (a,b) {window.scrollTo(a,b);}
-    $scope.content = {}; 
+    $scope.content = {};
+    
+
+    $scope.routeParams = $routeParams;
     $scope.hide =  function(p1,p2) { jQuery(p1).hide(p2); }
     $scope.show =  function(p1,p2) { jQuery(p1).show(p2); }
     $scope.RegXP = function (p1,p2) {return new RegExp(p1,p2);}

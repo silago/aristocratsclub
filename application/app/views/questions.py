@@ -41,6 +41,13 @@ def index():
     categories = Category.query.all()
     return render_template('questions/index.html',categories=categories)
 
+@questions.route("/questions/search",methods=['GET','PUT','OPTIONS'])
+def search():
+    data = request.get_json()
+    for k,o in data.iteritems():
+        search_string = "text like '"+o+"'"
+    question = Question().query.filter(search_string).all()
+    return jsonify(data=[ i.for_api() for  i in question])
 
 @questions.route("/questions/ask",methods=['GET','PUT']) 
 def ask():

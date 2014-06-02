@@ -37,15 +37,23 @@ angular.module('base.services', ['ngResource'])
               }
             
           )}).factory('Question',function($resource){
-          return $resource('/questions/ask/',
+          return $resource('/questions/:target/',
              {
                method: '@method',
+               target: '@target',
              },
              { PUT:{
                     method: "PUT",
-                    params: {method:"PUT"},
+                    params: {target:'ask',method:"PUT"},
                     }
-             })})
+             },
+             { GET:{ method: "GET",
+                         params: {target:'search',method:"OPTIONS"},
+                        }
+             }
+
+
+)})
 ;           
 
 

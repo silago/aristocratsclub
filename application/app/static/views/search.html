@@ -1,3 +1,4 @@
+
     
     <div class="columns large-9 large-centered">
 
@@ -41,36 +42,10 @@
             </nav>
     </div>
      
-    <div ng-init="$question = getFromModel('Question', {'id':routeParams.id})">
-            <h3> {{$question.data[0].name}} </h3>
+    <div ng-init="$question = searchInModel('Question', {'text':routeParams.text})">
             <p> 
-                {{$question.data[0].text}}
+                {{$question.data.}}
             </p>
-        <h5> Ответы </h5>
-
-        
-        <div ng-init="$answers = getFromModel('Answer', {'question':routeParams.id})">
-            <div ng-if="$answers.data.length==0"> 
-                <strong> Вопрос всё еще без ответа </strong>
-            </div>
-
-            <div ng-repeat="answer in $answers.data">
-                <p class="panel"> 
-                <small> <strong> {{answer.created_at}}, {{answer.author.name}}</strong></small> <br/>
-
-                {{answer.text}} </p> 
-            </div>
-        </div>
-
-                <div ng-if="!(current.uid)">
-                    Отвечать могут только зарегистрированные пользователи
-                </div>
-
-                <form ng-if="current.uid" name="ask" ng-init="$answer={'question':$question.data[0].id}" >
-                    <textarea  ng-model="$question.text" class="columns large-12" placholder="Текст ответа" name="text"> </textarea>
-                    <button  ng-click="Answer($answer);"  class="small large-12 columns"> submit </button>
-                </form>
-
 
     </div>  
     </div>

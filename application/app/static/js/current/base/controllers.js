@@ -38,6 +38,11 @@ angular.module('base').controller('baseCtrl',function($scope,$routeParams,  $htt
      } 
 
  
+    $scope.searchInModel = function (model, options){
+        if (options==undefined) options = {};
+        window.z = Question;
+        return 1; //Question.({model:model,  options:angular.toJson(options)});
+    } 
     $scope.getFromModel = function (model, options){
         if (options==undefined) options = {};
         return Model.GET({model:model,  options:angular.toJson(options)});

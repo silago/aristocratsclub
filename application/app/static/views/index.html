@@ -3,8 +3,8 @@
     <div class="columns large-6"> <span> Aristokrats  </span>  <br/> <br/>
 
         <form enctype=multipart/form-data action="/search/" method="get">
-           <div class="columns large-10"> <input type="text"  name="query"/ > </div>
-           <div class="columns large-2"> <input class="button tiny" name="submit" type="submit" value="Go"> </div>
+           <div class="columns large-10"><input ng-model="search_string" type="text"  name="query"/ > </div>
+           <div class="columns large-2"> <a class="button tiny" href="/#/search/{{search_string}}" name="submit" type="submit" value="Go"> Поиск </a>
         </form>
     </div>
     <div class="columns large-6"> [ru] [en] [de] </div>

@@ -1,5 +1,3 @@
-                   
-                    <div style="background-color: rgb(36, 36, 36); left: 0px; z-index: 99; height: 100%; opacity: 0.85; position: fixed; top: 0px; width: 100%;"> </div>
                     <!-- Есть профиль -->
                         <div style="left:-25%; width:300%; position:relative; z-index:9999;">
                         <table style="float:left; background-color:transparent; border:0;  width:100%;" > 
@@ -19,7 +17,7 @@
                                 <div style="padding:10px;">
                                 <ul id="editableProfile" class="no-bullet">
                                     <li><img style="width:100%;" src="/static/media/{{profile.img}}" alt="{{profile.name}}"/> </li>
-                                    <li> <span> ## {{profile}} Город: {{profile.data[0].city}} </span> </li>
+                                    <li> <span> Город: {{profile.city}} </span> </li>
                                     <li> <span> Страна:{{profile.country}} </span> </li>
                                     <li> <span> Email: {{profile.email}}   </span> </li>
                                     <li><a ng-click="$parent.$parent.profile=false;" href > Назад </a></li>
@@ -44,29 +42,35 @@
                             <div style='display: margin-top:-20px; inline-block; width:100%; border-right: 400px solid transparent; border-top: 100px solid #000; vertical-align: top;'></div>
                         </td>
                         <td style="width:12.5%;">
-
+                        <div ng-if="profile">
                         <div class="panel large-12" style="margin-top:102px;">
-                            <h5> Вопросы пользователя (1) </h5>                            
+                            <div ng-init="profile.$$questions = getFromModel('Question', {'author':profile.id})">
+                            <h5> Вопросы пользователя ({{profile.$$questions.data.length || 0}}) </h5>                            
+                            
                             <hr/>
-                            <div>
-                                  <h5 class="subheader"><a href> В чазах юга жил бы цитруc? </a></h5>
-                             </div>
+                                <div ng-repeat="q in profile.$$questions.data">
+                                   <h5 class="subheader"> <a href="/#/question/{{q.id}}/">{{q.name}}</a></h5> 
+                                </div> 
+                            </div>
+                        </div>
                         
                         </div>
 
                         </td>
                         <td style="width:12.5%;">
 
+                        <div ng-if="profile">
                         <div class="panel large-12" style="margin-top:102px;">
-                            <h5> Ответы пользователя (10) </h5>                            
+
+                            <div ng-init="profile.$$answers = getFromModel('Answer', {'author':profile.id})">
+                            <h5> Ответы пользователя ({{profile.$$answers.data.length || 0}}) </h5>                            
                             <hr/>
-                            <div>
-                                 Если поглядеть на нас просто, по-житейски, мы находимся в положении пассажиров, попавших в крушение в длинном железнодорожном
-                                 туннеле, и притом в таком месте, где уже не видно света начала, а свет конца настолько слаб, что взгляд то и дело ищет его и,,,
-                                 <br/>
-                                 <span class="subheader">25 мая в ответ на <a href="#"> В чащах юга жил бы цитрус? </a></span>
-                             </div>
-                        
+                                <div ng-repeat="a in profile.$$answers.data">
+                                 <p> {{a.text}}</p> 
+                                 <span class="subheader">{{a.created_at}}. в ответ на вопрос N <a href="/#/question/{{a.id}}/"> {{a.question}} </a></span>
+                                </div> 
+                            </div>
+                       </div> 
                         </div>
 
 

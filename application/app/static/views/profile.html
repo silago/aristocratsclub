@@ -1,54 +1,57 @@
                     <!-- Есть профиль -->
-                        <div style="left:-25%; width:300%; position:relative; z-index:9999;">
+                        <div style="position:fixed; background-color:#000; opacity:0.9; z-index:9998; width:110%; height:100%; top:0px; left:0px;">
+                        </div>
+                        <div style="left:0%; width:100%; position:relative; z-index:9999;">
                         <table style="float:left; background-color:transparent; border:0;  width:100%;" > 
                         <tr style="background-color:transparent;"> <td colspan=3> 
 
-                            <div style="z-index:-1; position: relative; width: 100%; white-space: nowrap; padding-left: 50%; top: 75px; background-color: rgb(250, 250, 250); float: left; height: 76px; margin-top: -40px;" >
+                            <div style="z-index:-1; position: relative; width: 249%; white-space: nowrap; padding-left: 50%; top: 75px; background-color: rgb(250, 250, 250); float: left; height: 76px; margin-top: -40px;" >
                                     <h2> {{profile.name}}</h2>
                             </div>
 
                         </td> </tr>
                         <tr style="background-color:transparent; vertical-align:top;" >
-                        <td style="width:15%;">
+                        <td style="width:10%;">
                         <div style='display: inline-block; width:100%; border-right: 400px solid transparent; border-bottom: 100px solid #000; vertical-align: top;'></div>
                             <br/>
                             <div
                                 style="background-color:#000; color:#fff;  border:1px; solid red; width:100%;">
-                                <div style="padding:10px;">
-                                <ul id="editableProfile" class="no-bullet">
-                                    <li><img style="width:100%;" src="/static/media/{{profile.img}}" alt="{{profile.name}}"/> </li>
-                                    <li> <span> Город: {{profile.city}} </span> </li>
-                                    <li> <span> Страна:{{profile.country}} </span> </li>
-                                    <li> <span> Email: {{profile.email}}   </span> </li>
-                                    <li><a ng-click="$parent.$parent.profile=false;" href > Назад </a></li>
-                                    <li><a href ng-click="profile.$$profileForm=true" ng-if="current.uid==profile.id">  Редактировать </a>
+                                <div style="padding:20px;">
+                                <!-- <ul id="editableProfile" class="no-bullet"> -->
+                                    <div><img style="width:100%;" src="/static/media/{{profile.img}}" alt="{{profile.name}}"/> </div>
+                                    <div> <span> Город: {{profile.city}} </span> </div>
+                                    <div> <span> Страна:{{profile.country}} </span> </div>
+                                    <div> <span> Email: {{profile.email}}   </span> </div>
+                                    <div><a ng-click="$data.profile=false; liHeight();" href > Назад </a></div>
+                                    <div><a href ng-click="profile.$$profileForm=true" ng-if="current.uid==profile.id">  Редактировать </a>
                     
                                     <div ng-if="profile.$$profileForm">
                                         <form enctype=multipart/form-data action="" method="post" name="login">
                                             <input ng-change="profile.$$changed=true" type="text" ng-model="profile.city" name="city"> 
                                             <input ng-change="profile.$$changed=true" type="text" ng-model="profile.country" name="country"> 
                                             <input ng-change="profile.$$changed=true" type="text" ng-model="profile.email" name="city"> 
-                                        <a ng-click="profile.$$profileForm = undefined;" href> ok </a>
+                                        <a ng-click="profile.$$profileForm = undefined;  liHeight();" href> ok </a>
                                         </form>
                                     </div>
-                                    </li>
-                                    <li>
+                                    </div>
+                                    <div>
                                         <a href ng-click=" profile.$$changed=undefined; Me().POST({data:toJson(profile)});"  ng-show=" !profile.$$profileForm && profile.$$changed"> apply </a>
-                                    </li>
-                                </ul>
+                                    </div>
+                               <!-- </ul> -->
                                  
                                 </div>
                             </div>
                             <div style='display: margin-top:-20px; inline-block; width:100%; border-right: 400px solid transparent; border-top: 100px solid #000; vertical-align: top;'></div>
                         </td>
-                        <td style="width:12.5%;">
+                        <td style="width:12%;">
                         <div ng-if="profile">
                         <div class="panel large-12" style="margin-top:102px;">
                             <div ng-init="profile.$$questions = getFromModel('Question', {'author':profile.id})">
                             <h5> Вопросы пользователя ({{profile.$$questions.data.length || 0}}) </h5>                            
                             
                             <hr/>
-                                <div ng-repeat="q in profile.$$questions.data">
+                                 <div ng-if="profile.$$questions.data.length==0"> Пользователь не опубликовал ни одного вопроса.</div>
+                                 <div ng-repeat="q in profile.$$questions.data">
                                    <h5 class="subheader"> <a href="/#/question/{{q.id}}/">{{q.name}}</a></h5> 
                                 </div> 
                             </div>
@@ -57,7 +60,7 @@
                         </div>
 
                         </td>
-                        <td style="width:12.5%;">
+                        <td style="width:12%;">
 
                         <div ng-if="profile">
                         <div class="panel large-12" style="margin-top:102px;">
@@ -65,6 +68,7 @@
                             <div ng-init="profile.$$answers = getFromModel('Answer', {'author':profile.id})">
                             <h5> Ответы пользователя ({{profile.$$answers.data.length || 0}}) </h5>                            
                             <hr/>
+                                <div ng-if="profile.$$answers.data.length==0"> Пользователь не опубликовал ни одного ответа.</div>
                                 <div ng-repeat="a in profile.$$answers.data">
                                  <p> {{a.text}}</p> 
                                  <span class="subheader">{{a.created_at}}. в ответ на вопрос N <a href="/#/question/{{a.id}}/"> {{a.question}} </a></span>
@@ -75,23 +79,23 @@
 
 
                         </td>
-                        <td style="width:9%;">
+                        <td style="width:10%;">
                         <div class="panel large-12" style="margin-top:102px;">
                         <ul>
-                           <li> <a href="#"> VIP&nbsp;предложение </a> </li>
-                           <li> <a href="#"> Назад </a> </li> 
+                           <li> <a href="#"> Отправить сообщение пользователю</a> </li>
                         </ul>
                          </div>
                         </td>
                         
-                            <td>
+                            <td style="width:50%;">
                             <div ng-if="profile" style=" margin-top:102px;">
                             <div class="panel columns">
                             <div ng-init="$photos = getFromModel('Media', {'user_id':profile.id})">
-                                <div ng-repeat="photo in $photos.data">
+                                 <div class="large-12 panel" ng-show="$photos.data && ($photos.data.length==0)"> Пользователь не загрузил ни одного фото </div>
+                                 <div ng-repeat="photo in $photos.data">
                                     <div class="columns large-3">
-                                        <div class="panel">
-                                           <a  href ><img src="/static/media/thumb_{{photo.url}}" alt="" /></a>
+                                        <div class="large-12 panel">
+                                           <a  href ><img style="width:100%;" src="/static/media/thumb_{{photo.url}}" alt="" /></a>
                                         </div>
                                     </div>
                                 </div>

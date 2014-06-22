@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+   <div class="columns large-12">
+        {% if not result %}
+            <h3> По вашему запросу ничего не найдено </h3>
+            <p> Попробуйте уточнить запрос или зайдайте интересующий вас вопрос сами </p>
+        {% endif %}
+
+        {% for r in result %}
+           <div class="panel">
+                 {{r.text|truncate(144,true)}}
+                 </br>
+                 </br>
+                 {% if r.question_data %}
+                    <i> Ответ на вопрос <a href="/question_data/{{r.id}}/">#{{r.question_data.id}}</a> "{{r.question_data.name|truncate(40,true)}}..." {{r.created_at}} </i>
+                 {% else %}
+                    <i> Вопрос <a href="/question_data/{{r.id}}/">#{{r.id}}</a> "{{r.name|truncate(40,true)}}..." </i> {{r.created_at}}
+                 {% endif %} 
+           </div>
+       {% endfor %}
+   </div>
+{% endblock %} 
+

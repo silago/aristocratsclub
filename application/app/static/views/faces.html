@@ -1,22 +1,26 @@
-<div class="columns large-12">
-
-<div ng-show="sidewall||sidesearch"style="position:absolute;  margin-left:-30px;  z-index:999;" class="row">
+<div class="columns large-6">
+<div ng-show="sidewall||sidesearch"style="position:absolute;  margin-left:-4%;  z-index:999;" class="row">
     <div style="" class="columns large-4">
     &nbsp;
     </div>
     <div ng-if="sidewall" class="columns panel large-6">
         <div ng-init="$wall = getFromModel('Question',{'category':content.options.group})">
-                <form name="ask" ng-init="$question={'category':content.options.group}" >
+                <div  class="">
+                    <strong class="subheader" style="text-transform:uppercase; font-weight:bold; font-size:small;"> Вопросы раздела</strong>
+              <a href ng-click="formVisible=!formVisible" style="text-transform:uppercase; float:right; border-bottom:1px dashed #008CBA; padding-top:3px; font-size:small;"> Задать вопрос  </a><br/>
+<div style="clear:both;"> </div>  
+                <br/> 
+                <form name="ask" class="fade" ng-show="formVisible" ng-init="$question={'category':content.options.group}" >
                     <input     ng-model="$question.name"  class="columns large-12" name="name" type="text" placeholder="Тема вопроса" />
                     <textarea  ng-model="$question.text" class="columns large-12" placholder="Текст вопроса" name="text"> </textarea>
-                    <button  ng-click="Ask($question);"  class="small large-12 columns"> submit </button>
+                    <button  ng-click="Ask($question);"  class="small large-12 columns"> Задать вопрос </button>
                     </form>
-                <div  class="columns large-12">
-                    <h5 class="subheader"> Вопросы раздела </h5>
+
                 </div>
-                <div class="columns large-12" ng-repeat="w in $wall.data">
+                <br/> 
+                <div class="" style="padding-bottom:10px; margin-bottom:10px; font-size:small; border-bottom:1px solid lightgray;" ng-repeat="w in $wall.data">
                     
-                        <div class="panel"> <a href='#/question/{{w.id}}/'> {{w.name}} </a> </div>
+                        <div class=""> <a href='#/question/{{w.id}}/'> {{w.name}} </a> </div>
                 </div>
         </div>
 
@@ -34,16 +38,34 @@
     </ul>
 </div>  
 
- <div ng-init="$data = getFromModel('User', content.options)">
-        <div ng-repeat="i in $data.data">
-            <div style="float:left;" class="large-3">
-                <a ng-click="$parent.profile=i; scrollTo(0,600);" href ><img src="/static/media/thumb_{{i.img}}" alt="{{i.name}}" /></a>
-            </div>
-            <div ng-if="($index+1) == ($data.data.length/2) || ($index+1)==(($data.data.length+1)/2) ">
-                <div id="profile" style="position:relative; z-index:9999;" ng-include="'/static/views/profile.html'"  ng-show="$parent.profile">
+ <div  ng-init="$data = getFromModel('User', content.options)">
+ <ul data-orbit ng-if="$data.data" ng-init="y= sliceToParts($data.data,16); profile=[];"> 
+            <li toready="orbitReinit()"  ng-repeat="z in y">
+                
+            <div ng-repeat="i in z">
+                <div style="float:left;" class="large-3">
+                    <a ng-click="$data.profile=i; scrollTo(0,600);" href ><img src="/static/media/thumb_{{i.img}}" alt="{{i.name}}" /></a>
                 </div>
+                
+                <div  ng-if="(($index+1)==(   (z.length % 2)==0 ? z.length/2 : (z.length+1)/2    ) ) ">
+                    <div class="profileHolder" ng-if="$data.profile">
+                    </div>
+                </div>
+
+            
+            
             </div>
-       
-             </div>
+            </li>
     </div>
+</ul>
+                    <div id="profile"
+                         style="position:absolute;width:400%; z-index:9999;"
+                         ng-include="'/static/views/profile.html'"
+                         ng-init="profile=$data.profile "
+                         toready="showProfileAnimation()"
+                         ng-if="$data.profile">
+                    </div>
 </div>
+
+
+

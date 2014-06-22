@@ -1,3 +1,5 @@
+ # -*- coding: utf-8 -*- import sys reload(sys) sys.setdefaultencoding('utf-8')
+
 from flask import render_template, request, Module, jsonify, json
 from flask.ext import login 
 #ifrom app import app
@@ -43,10 +45,15 @@ def GET(model):
 def POST(model):
     pass
 
-@main.route("/search/",methods=['GET'])
-def search():
-    form = searchForm()
-    return render_template("search.html",form=form)
+@main.route("/search/<string>/",methods=['GET'])
+def search(string):
+    string = string.encode('utf-8') 
+    questions = [i.for_api() for i in models.Question.query.filter(models.Question.text.like("%"+string+"%")).all()]
+    answers = [i.for_api() for i in models.Answer.query.filter(models.Answer.text.like("%"+string+"%")).all()]
+    result = questions + answers;
+    result = sorted(result,key = lambda i: i['created_at'])
+    #result = list(db.engine.execute("(SELECT id, text, 'ответ' as tbl, 'answer' as tbl_name FROM `answer`   where text like \"%%"+string+"%%\"  ) union (select   id,  text,  'вопрос' as tbl,  'question' as tbl_name from `question` where text like \"%%"+string+"%%\")")) 
+    return render_template("result.html",result=result)
 
 @main.route("/",methods=['GET','POST'])
 def index():

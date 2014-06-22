@@ -1,4 +1,14 @@
-.side-nav .heading_2 {
+nav.withOver > ul > li:not(.unc) > div {width:400%; z-index:99999; background-color:#fff;  position:relative;} 
+body {background-image:url('/static/img/crossword.png');}
+
+.profileHolder{clear:both;}
+
+z.orbit-container {overflow:auto!important;}
+
+.orbit-container{overflow:visible;}
+.orbit-container ul {overflow:hidden;}
+
+ide-nav .heading_2 {
 text-transform:uppercase;
 font-weight:bolder;
 font-size:12px;
@@ -14,4 +24,38 @@ font-size:12px;
 }
 
 .main {border:1px solid lightgray;}
+
+
+
+
+
+
+
+
+
+
+
+
+.fade {
+
+}
+
+.fade {
+  -webkit-transition:all linear 0.5s;
+  -moz-transition:all linear 0.5s;
+  -o-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+  display:block!important;
+}
+
+.fade.ng-hide {
+  opacity:0;
+  height:0px;;
+  overflow:hidden;
+}
+
+.fade {
+  opacity:1;
+  height:auto;
+}
 

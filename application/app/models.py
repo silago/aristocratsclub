@@ -114,7 +114,7 @@ class Question(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     def for_api(self): 
-        return {'id':self.id,'name':self.name,'text':self.text}
+        return {'id':self.id,'name':self.name,'text':self.text, 'created_at':self.created_at}
     
     def __repr__(self):
         return '<Question %r>' % (self.name)
@@ -128,8 +128,12 @@ class Answer(db.Model):
     author = db.Column(db.Integer, db.ForeignKey('user.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    def get_question(self):
+        return Question().query.filter('id='+str(self.question)).first().for_api()
+    def get_author(self):
+        return User().query.filter('id='+str(self.author)).first().for_api()
     def for_api(self):
-        return {'id':self.id,'text':self.text,'created_at':self.created_at,'author':User().query.filter('id='+str(self.author)).first().for_api()}
+        return {'id':self.id,'text':self.text,'created_at':self.created_at,'author':self.get_author(),'question_data':self.get_question(),'created_at':self.created_at}
     def __repr__(self):
         return '<Answer %r>' % (self.name)
 

@@ -13,7 +13,7 @@ questions = Module(__name__)
 @questions.route("/question/<alias>/")
 def question(alias):
     form = answerForm()
-    question = Question.query.filter(Question.alias==alias).first()
+    question = Question.query.filter(Question.id==alias).first()
     answers = Answer.query.filter(Answer.question==question.id)
     return render_template('questions/question.html',question=question,answers=answers,form=form)
 

@@ -44,7 +44,7 @@
                 
             <div ng-repeat="i in z">
                 <div style="float:left;" class="large-3">
-                    <a ng-click="$data.profile=i; scrollTo(0,600);" href ><img src="/static/media/thumb_{{i.img}}" alt="{{i.name}}" /></a>
+                    <a ng-click="$data.profile=i;" href ><img src="/static/media/thumb_{{i.img}}" alt="{{i.name}}" /></a>
                 </div>
                 
                 <div  ng-if="(($index+1)==(   (z.length % 2)==0 ? z.length/2 : (z.length+1)/2    ) ) ">

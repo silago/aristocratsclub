@@ -64,14 +64,14 @@
 
                         <div ng-if="profile">
                         <div class="panel large-12" style="margin-top:102px;">
-
+                         
                             <div ng-init="profile.$$answers = getFromModel('Answer', {'author':profile.id})">
                             <h5> Ответы пользователя ({{profile.$$answers.data.length || 0}}) </h5>                            
                             <hr/>
                                 <div ng-if="profile.$$answers.data.length==0"> Пользователь не опубликовал ни одного ответа.</div>
                                 <div ng-repeat="a in profile.$$answers.data">
-                                 <p> {{a.text}}</p> 
-                                 <span class="subheader">{{a.created_at}}. в ответ на вопрос N <a href="/#/question/{{a.id}}/"> {{a.question}} </a></span>
+                                 <p> {{a.text}}</p>
+                                 <span class="subheader">{{a.created_at}}. в ответ на вопрос № <a href="/#/question/{{a.question_data.id}}/"> {{a.question_data.id}} </a></span>
                                 </div> 
                             </div>
                        </div> 
@@ -91,11 +91,17 @@
                             <div ng-if="profile" style=" margin-top:102px;">
                             <div class="panel columns">
                             <div ng-init="$photos = getFromModel('Media', {'user_id':profile.id})">
+                                 
+                                <div ng-show="blackBgImage" class="blackBg"> </div>
+                                <div ng-if="blackBgImage" ng-click="$parent.blackBgImage=false"  class="blackContent">
+                                    <img src="/static/media/{{blackBgImage}}" alt="" />
+                                </div>
+
                                  <div class="large-12 panel" ng-show="$photos.data && ($photos.data.length==0)"> Пользователь не загрузил ни одного фото </div>
                                  <div ng-repeat="photo in $photos.data">
                                     <div class="columns large-3">
                                         <div class="large-12 panel">
-                                           <a  href ><img style="width:100%;" src="/static/media/thumb_{{photo.url}}" alt="" /></a>
+                                           <a ng-click="$parent.blackBgImage=photo.url" href ><img style="width:100%;" src="/static/media/thumb_{{photo.url}}" alt="" /></a>
                                         </div>
                                     </div>
                                 </div>

@@ -1,7 +1,12 @@
 nav.withOver > ul > li:not(.unc) > div {width:400%; z-index:99999; background-color:#fff;  position:relative;} 
 body {background-image:url('/static/img/crossword.png');}
-
+.acc {position:relative;}
 .profileHolder{clear:both;}
+
+.blackBg {position:fixed; top:0px; left:0px; width:100%; height:100%; background-color:#000; opacity:0.7; z-index:1;}
+.blackContent {position:fixed; top:0px; left:0px; width::100%; padding:0 50%; height:100%; text-align:center; z-index:2;}
+.blackContent img {max-width:90%; max-height:90%; margin-top:5%; margin-left:-100%; border:5px solid #fff; border-radius:3px;}
+
 
 z.orbit-container {overflow:auto!important;}
 
@@ -59,3 +64,8 @@ font-size:12px;
   height:auto;
 }
 
+
+
+.orbit-container .orbit-prev, .orbit-container .orbit-next {
+    background-color: rgba(0, 0, 0, 0.7);
+}

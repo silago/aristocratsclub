@@ -36,14 +36,12 @@ angular.module('base').controller('baseCtrl',function($scope,$routeParams,  $htt
             //$(".acc").css({"margin-left":'-170px', 'position':'absolute'});
             //$(".acc > li").css({"margin-left":'170px'});
             var previousWidth = '0';
-            var fromTop = 0;
             $(".acc").height($(".acc > li").length*20);
             $(".acc > li").each(function(){
                 r = Math.random(1)*1000+100;
                 $(this).css({'left':previousWidth,'float':'none','position':'absolute','top':'0px'});
                 previousWidth = $(this).offset().left;
-                $(this).animate({'left':'0px','top':fromTop},r);
-                fromTop=+20;
+                $(this).animate({'left':'0px','top':$(this).index()*20},r);
              });
             //$(".acc").addClass("lefted");
         //}

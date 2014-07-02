@@ -97,7 +97,7 @@ angular.module('base').controller('baseCtrl',function($scope,$routeParams,  $htt
     }
 
     function orbitReinit(){
-        $(document).foundation({orbit:{
+        window.o = $(document).foundation({orbit:{
                 bullets:false,
                 timer:false,
                 slide_number:false

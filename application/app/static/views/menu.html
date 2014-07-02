@@ -32,7 +32,12 @@
                                 
                             </ul>
                         </div>
-                    </div>
+                   
+    <div ng-if="content.ready">
+        <div ng-if="content.ready"  ng-include="content.template">
+        </div>
+    </div> 
+                     </div>
                 <br/>
                 </li>
                 <li style="clear:both;">
@@ -45,8 +50,8 @@
                      </div>
                 </li>
                 <li  class="unc" ng-if="!(current.uid>0)">
-                    <a href="#"> Регистрация/Вход </a>
-                    <di> 
+                    <a href ng-click="show= (show=='regnenter') ? false : 'regnenter'"  > Регистрация/Вход </a>
+                    <div class="fade" ng-show="show=='regnenter'"> 
                             <ul>
                                 <li><a href='/auth/login/'> Вход </a> </li>
                                 <li><a href='/auth/reg/'> Регистрация </a> </li>

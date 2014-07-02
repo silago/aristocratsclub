@@ -1,4 +1,18 @@
-nav.withOver > ul > li:not(.unc) > div {width:400%; z-index:99999; background-color:#fff;  position:relative;} 
+
+
+
+
+
+
+nav.withOver > ul > li:not(.unc) > div {width:100%; z-index:99999; zbackground-color:#fff;  position:relative;} 
+
+nav.withOver h4 {color:#fff;}
+nav.withOver h3 {color:#fff;}
+nav.withOver h2 {color:#fff;}
+nav.withOver h5 {color:#fff;}
+nav.withOver > ul {text-align:center; color:#e2e2e2;}
+nav.withOver > ul > li > a {text-transform: uppercase; font-size: 36px; color:#e2e2e2; }
+nav.withOver > ul li a  { color:#e2e2e2; }
 body {background-image:url('/static/img/crossword.png');}
 .acc {position:relative; width:500px;}
 .profileHolder{clear:both;}
@@ -28,7 +42,7 @@ font-size:12px;
     font-size:12px;
 }
 
-.main {border:1px solid lightgray;}
+z.main {border:1px solid lightgray;}
 
 
 

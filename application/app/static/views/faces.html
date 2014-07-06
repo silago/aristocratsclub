@@ -39,6 +39,8 @@
 </div>  
 
  <div  ng-init="$data = getFromModel('User', content.options)">
+
+
  <ul data-orbit ng-if="$data.data" ng-init="y= sliceToParts($data.data,16); profile=[];"> 
             <li toready="orbitReinit()"  ng-repeat="z in y">
                 
